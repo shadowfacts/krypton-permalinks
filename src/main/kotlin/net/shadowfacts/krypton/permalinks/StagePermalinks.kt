@@ -29,6 +29,7 @@ class StagePermalinks: Stage() {
 				parts[i] = permalinkData[parts[i]] ?: throw RuntimeException("No permalink substitution for %${parts[i]}%")
 			}
 			permalink = parts.joinToString("")
+			page.metadata["permalink"] = permalink
 			if (permalink.endsWith("/")) permalink += page.krypton.config.permalinkIndex
 			val destination = File(page.krypton.config.output, permalink)
 			page.output = destination
