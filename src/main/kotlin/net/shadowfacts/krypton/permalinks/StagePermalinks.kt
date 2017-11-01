@@ -17,9 +17,6 @@ class StagePermalinks: Stage() {
 	override val id = "permalinks"
 
 	override fun scan(page: Page) {
-	}
-
-	override fun apply(page: Page, input: String): String {
 		if ("permalink" in page.metadata) {
 			val permalinkData = createPermalinkData(page)
 
@@ -34,8 +31,9 @@ class StagePermalinks: Stage() {
 			val destination = File(page.krypton.config.output, permalink)
 			page.output = destination
 		}
-		return input
 	}
+
+	override fun apply(page: Page, input: String) = input
 
 	private fun createPermalinkData(page: Page): Map<String, String> {
 		val data = mutableMapOf<String, String>()
